@@ -210,7 +210,8 @@ class MainMenu:
     def showMenu(self):
         self.mainTitleStr.set("Main Menu")
         self.currentMenu.hide()
-        self.show()
+        self.currentMenu = self
+        self.currentMenu.show()
 
 
 root = Window(themename="darkly")
@@ -224,3 +225,4 @@ backButton = Button(root, text="Back", bootstyle="danger", command=menu.showMenu
 backButton.pack(side="bottom")
 
 root.mainloop()
+
