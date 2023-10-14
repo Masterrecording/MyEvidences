@@ -13,4 +13,4 @@
 
 All this files are created by me with some help of friends, any download is free but if you will reupload this, PLEASE give credits to me.
 
-Download this release by clicking  [Here](https://github.com/Masterrecording/MyEvidences/files/12852360/MyEvidences.zip)
+Download this release by clicking  [Here](https://github.com/Masterrecording/MyEvidences/releases/download/v1.0.1/MyEvidences.exe)
