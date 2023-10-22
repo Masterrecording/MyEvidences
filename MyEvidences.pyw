@@ -1,5 +1,12 @@
 from ttkbootstrap import *
 from pyperclip import copy
+import json
+from imgurpython import *
+from tkinter import filedialog
+import tkinter
+
+with open("config.json", "r") as file:
+    config = json.load(file)
 
 
 class TeamspeakMenu:
@@ -13,6 +20,7 @@ class TeamspeakMenu:
         self.labelFrame.pack(side='left')
         self.entryFrame.pack(side='left')
         self.savePFrame.pack(pady=5)
+        self.proofStr = StringVar()
 
         self.ignLabel = Label(self.labelFrame, text="IGN:", font=self.font)
         self.ign = Entry(self.entryFrame, font=self.font)
@@ -20,10 +28,26 @@ class TeamspeakMenu:
         self.reasonLabel = Label(self.labelFrame, text="Reason:", font=self.font)
         self.reason = Entry(self.entryFrame, font=self.font)
 
+        self.proofsFrame = Frame(self.entryFrame)
         self.proofsLabel = Label(self.labelFrame, text="Proofs:", font=self.font)
-        self.proofs = Entry(self.entryFrame, font=self.font)
+        self.defProofs = Entry(self.proofsFrame, font=self.font)
+        self.proofs = tkinter.Entry(self.proofsFrame, font=self.font, width=12, borderwidth=5,
+                                    state=config["Proofs Entry"], textvariable=self.proofStr)
+        self.upload = Button(self.proofsFrame, bootstyle="warning", text="upload", command=self.uploadImage)
 
         self.copyButton = Button(self.savePFrame, text="Copy", bootstyle="succes", command=self.saveProof)
+
+    def uploadImage(self):
+        path = filedialog.askopenfilename(initialdir="/", title="Select file",
+                                          filetypes=(("image files", ["*.jpg", "*.png", "*.webp"]), ("All files", "*.*")
+                                                     ))
+        cl = ImgurClient(config["Client ID"], config["Client Secret"])
+        try:
+            image = cl.upload_from_path(path=path, config=None, anon=True)
+            proof = image["link"]
+            self.proofStr.set(proof)
+        except FileNotFoundError:
+            pass
 
     def show(self):
         self.ignLabel.pack(side="top", pady=5)
@@ -33,7 +57,12 @@ class TeamspeakMenu:
         self.reason.pack(side="top")
 
         self.proofsLabel.pack(side="top", pady=5)
-        self.proofs.pack(side="top")
+        self.proofsFrame.pack(side="top")
+        if config["Upload Option"] == "true":
+            self.proofs.pack(side="left")
+            self.upload.pack(side="left", padx=1)
+        else:
+            self.defProofs.pack()
 
         self.copyButton.pack(side="bottom")
 
@@ -45,12 +74,15 @@ class TeamspeakMenu:
         self.reason.destroy()
 
         self.proofsLabel.destroy()
+        self.proofsFrame.destroy()
         self.proofs.destroy()
+        self.upload.destroy()
         self.labelFrame.destroy()
         self.entryFrame.destroy()
         self.savePFrame.destroy()
         self.copyButton.destroy()
         self.optionsFrame.destroy()
+        self.defProofs.destroy()
 
     def saveProof(self):
         ign = self.ign.get()
@@ -72,6 +104,7 @@ class MuteMenu:
         self.labelFrame.pack(side='left')
         self.entryFrame.pack(side='left')
         self.savePFrame.pack(pady=5)
+        self.proofStr = StringVar()
 
         self.ignLabel = Label(self.labelFrame, text="IGN:", font=self.font)
         self.ign = Entry(self.entryFrame, font=self.font)
@@ -82,10 +115,26 @@ class MuteMenu:
         self.modalityLabel = Label(self.labelFrame, text="Modality:", font=self.font)
         self.modality = Entry(self.entryFrame, font=self.font)
 
+        self.proofsFrame = Frame(self.entryFrame)
         self.proofsLabel = Label(self.labelFrame, text="Proofs:", font=self.font)
-        self.proofs = Entry(self.entryFrame, font=self.font)
+        self.defProofs = Entry(self.proofsFrame, font=self.font)
+        self.proofs = tkinter.Entry(self.proofsFrame, font=self.font, width=12, borderwidth=5,
+                                    state=config["Proofs Entry"], textvariable=self.proofStr)
+        self.upload = Button(self.proofsFrame, bootstyle="warning", text="upload", command=self.uploadImage)
 
         self.copyButton = Button(self.savePFrame, text="Copy", bootstyle="succes", command=self.saveProof)
+
+    def uploadImage(self):
+        path = filedialog.askopenfilename(initialdir="/", title="Select file",
+                                          filetypes=(("image files", ["*.jpg", "*.png", "*.webp"]), ("All files", "*.*")
+                                                     ))
+        cl = ImgurClient(config["Client ID"], config["Client Secret"])
+        try:
+            image = cl.upload_from_path(path=path, config=None, anon=True)
+            proof = image["link"]
+            self.proofStr.set(proof)
+        except FileNotFoundError:
+            pass
 
     def show(self):
         self.ignLabel.pack(side="top", pady=5)
@@ -98,7 +147,12 @@ class MuteMenu:
         self.modality.pack(side="top")
 
         self.proofsLabel.pack(side="top", pady=5)
-        self.proofs.pack(side="top")
+        self.proofsFrame.pack(side="top")
+        if config["Upload Option"] == "true":
+            self.proofs.pack(side="left")
+            self.upload.pack(side="left", padx=1)
+        else:
+            self.defProofs.pack()
 
         self.copyButton.pack(side="bottom")
 
@@ -113,12 +167,15 @@ class MuteMenu:
         self.modality.destroy()
 
         self.proofsLabel.destroy()
+        self.proofsFrame.destroy()
         self.proofs.destroy()
+        self.upload.destroy()
         self.labelFrame.destroy()
         self.entryFrame.destroy()
         self.savePFrame.destroy()
         self.copyButton.destroy()
         self.optionsFrame.destroy()
+        self.defProofs.destroy()
 
     def saveProof(self):
         ign = self.ign.get()
@@ -225,4 +282,3 @@ backButton = Button(root, text="Back", bootstyle="danger", command=menu.showMenu
 backButton.pack(side="bottom")
 
 root.mainloop()
-
