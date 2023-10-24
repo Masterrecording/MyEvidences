@@ -10,6 +10,7 @@
 -   Mutes evidence gui creator
 -   Warns evidence gui creator
 -   Tp Here evidence gui creator
+-   Upload image system
 
 All this files are created by me with some help of friends, any download is free but if you will reupload this, PLEASE give credits to me.
 
