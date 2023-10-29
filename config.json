@@ -2,5 +2,7 @@
   "Client Secret": "Get one at https://api.imgur.com/oauth2/addclient",
   "Client ID": "Get one at https://api.imgur.com/oauth2/addclient",
   "Upload Option": "true",
-  "Proofs Entry": "normal"
+  "Proofs Entry": "normal",
+  "Special IGN Formatter": "false",
+  "Warnings": "true"
 }
