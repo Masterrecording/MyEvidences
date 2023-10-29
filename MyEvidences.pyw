@@ -9,6 +9,15 @@ with open("config.json", "r") as file:
     config = json.load(file)
 
 
+def process(text, res=""):
+    if "_" in text or "*" in text:
+        for i in text:
+            if i == "_":
+                res += "\\"
+            res += i
+    return res
+
+
 class TeamspeakMenu:
     def __init__(self):
         self.font = "Calibri 12"
@@ -85,7 +94,7 @@ class TeamspeakMenu:
         self.defProofs.destroy()
 
     def saveProof(self):
-        ign = self.ign.get()
+        ign = process(self.ign.get())
         reason = self.reason.get()
         proofs = self.proofs.get()
         copy(f"""[»] IGN: {ign} 
@@ -178,7 +187,7 @@ class MuteMenu:
         self.defProofs.destroy()
 
     def saveProof(self):
-        ign = self.ign.get()
+        ign = process(self.ign.get())
         reason = self.reason.get()
         proofs = self.proofs.get()
         modality = self.modality.get()
