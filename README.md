@@ -43,6 +43,7 @@ Download this release by clicking  [Here](https://github.com/Masterrecording/MyE
 | Special IGN Formatter | Set to "true" or "false", This will add a `\ ` if an special caracter is founded (" * " or " _ ")              |
 | Warnings              | Set to "true" or "false", This will add a popup message when a field is missing                                |
 
+<br/><br/>
 
 # Config.json examples
 
