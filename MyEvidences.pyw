@@ -2,7 +2,7 @@ from ttkbootstrap import *
 from pyperclip import copy
 import json
 from imgurpython import *
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 import tkinter
 
 with open("config.json", "r") as file:
@@ -10,11 +10,14 @@ with open("config.json", "r") as file:
 
 
 def process(text, res=""):
-    if "_" in text or "*" in text:
-        for i in text:
-            if i == "_":
-                res += "\\"
-            res += i
+    if config["Special IGN Formatter"] == "true":
+        if "_" in text or "*" in text:
+            for i in text:
+                if i == "_":
+                    res += "\\"
+                res += i
+    else:
+        res = text
     return res
 
 
@@ -97,6 +100,13 @@ class TeamspeakMenu:
         ign = process(self.ign.get())
         reason = self.reason.get()
         proofs = self.proofs.get()
+        if config["Warnings"] == "true":
+            if self.ign.get() == "":
+                return messagebox.showwarning("No IGN", "You didn't set any IGN")
+            if reason == "":
+                return messagebox.showwarning("No reason", "You didn't set any reason")
+            if proofs == "":
+                return messagebox.showwarning("No proofs", "You didn't set any proofs")
         copy(f"""[»] IGN: {ign} 
 [»] Reason: {reason}
 [»] Proof: {proofs}""")
@@ -191,6 +201,15 @@ class MuteMenu:
         reason = self.reason.get()
         proofs = self.proofs.get()
         modality = self.modality.get()
+        if config["Warnings"] == "true":
+            if self.ign.get() == "":
+                return messagebox.showwarning("No IGN", "You didn't set any IGN")
+            if reason == "":
+                return messagebox.showwarning("No reason", "You didn't set any reason")
+            if modality == "":
+                return messagebox.showwarning("No modality", "You didn't set any modality")
+            if proofs == "":
+                return messagebox.showwarning("No proofs", "You didn't set any proofs")
         copy(f"""[»] IGN: {ign} 
 [»] Reason: {reason}
 [»] Modality: {modality}
@@ -280,7 +299,7 @@ class MainMenu:
         self.currentMenu.show()
 
 
-root = Window(themename="darkly")
+root = Window(themename="darkly", iconphoto="logo.png")
 root.geometry("260x300")
 root.title("EvidencesMenu")
 
