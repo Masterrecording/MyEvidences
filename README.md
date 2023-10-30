@@ -20,7 +20,7 @@ Download this release by clicking  [Here](https://github.com/Masterrecording/MyE
 
 # How to config.json
 
-> Config.json (default)
+> **Config.json (default)**
 >  ```
 > {  
 >   "Client Secret": "Get one at https://api.imgur.com/oauth2/addclient",
