@@ -16,6 +16,8 @@ def process(text, res=""):
                 if i == "_":
                     res += "\\"
                 res += i
+        else:
+            res = text
     else:
         res = text
     return res
