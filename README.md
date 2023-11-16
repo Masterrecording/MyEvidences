@@ -1,6 +1,6 @@
 # My evidences 
 > By: 0.1fps & whopotz
-
+![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green)
 
 # Characteristics:
 
