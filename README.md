@@ -64,3 +64,7 @@ Download this release by clicking  [Here](https://github.com/Masterrecording/MyE
 | `"Special IGN Formatter": "false"`      | `"Special IGN Formatter": "true"`       |
 |-----------------------------------------|-----------------------------------------|
 | ![Image](https://imgur.com/E8OuRzv.png) | ![Image](https://imgur.com/nTCLuCP.png) |
+
+
+# License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
